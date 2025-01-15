@@ -21,4 +21,5 @@ from categories.views import categories
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('interests/', categories, name='interests'),
+    path("about/", include("about.urls"), name="about-urls"),
 ]
