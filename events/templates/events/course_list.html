@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Courses</h1>
+
+<form method="GET">
+    {% csrf_token %}
+    <select name="interest">
+        <option value="">All Interests</option>
+        {% for interest in interests %}
+            <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
+                {{ interest.name }}
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for course in courses %}
+        <li>
+            <h2>{{ course.name }}</h2>
+            <p>{{ course.description }}</p>
+            </li>
+    {% endfor %}
+</ul>
+{% endblock %}
