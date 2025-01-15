@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
+from events.views import events_courses
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('interests/', categories, name='interests'),
     path("about/", include("about.urls"), name="about-urls"),
     path('summernote/', include('django_summernote.urls')),
+    path('eventsandcourses/', events_courses, name='eventsandcourses'),
 ]
+

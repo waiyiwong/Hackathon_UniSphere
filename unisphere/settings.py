@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure-(ld$yai6#f7&@4o2bxi=_fh@w-3mhrja#9&o!30@a8neh2&*zq
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-joeht112-unisphere-kz4ytwskpb1.ws.codeinstitute-ide.net',
-                 '8000-joeht112-unisphere-wvpvvjl2shy.ws.codeinstitute-ide.net',]
+                 '8000-joeht112-unisphere-wvpvvjl2shy.ws.codeinstitute-ide.net', 
+                 '8000-joeht112-unisphere-v6m329lqdec.ws.codeinstitute-ide.net',]
 
 
 # Application definition
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'about',
     'django_summernote',
     'crispy_forms',
+    'events',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
