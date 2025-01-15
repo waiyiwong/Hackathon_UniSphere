@@ -27,7 +27,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'django-insecure-(ld$yai6#f7&@4o2bxi=_fh@w-3mhrja#9&o!30@a8neh2&*zq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-joeht112-unisphere-kz4ytwskpb1.ws.codeinstitute-ide.net',
                  '8000-joeht112-unisphere-wvpvvjl2shy.ws.codeinstitute-ide.net', 
@@ -64,12 +64,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.codeinstitute-ide.net", "https://*.herokuapp.com"
+]
+
 ROOT_URLCONF = 'unisphere.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
