@@ -21,6 +21,7 @@ from events.views import events_courses
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('categories.urls')),
     path('interests/', categories, name='interests'),
     path("about/", include("about.urls"), name="about-urls"),
     path('summernote/', include('django_summernote.urls')),
