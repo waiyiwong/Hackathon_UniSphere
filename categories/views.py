@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Interests
+from django.db.models import Q
 
 # Create your views here.
 def categories(request):
@@ -20,9 +21,19 @@ def interests_list(request):
 
     :template:`categories/interests_list.html`
     """
-    interests = Interests.objects.all()
+    query = request.GET.get('q')
+    if query:
+        interests = Interests.objects.filter(
+                Q(name__icontains=query) |
+                Q(description__icontains=query)
+        )
+        if not interests.exists():
+            messages.info(self.request,
+                          "Entered interest not found.")
+    else:
+        interests = Interests.objects.all()
     return render(request,
-                  'categories/interests_list.html', {'interests': interests})
+                  'categories/interests_list.html', {'interests': interests, 'query': query})
 
 
 # Display posts by category

@@ -2,6 +2,27 @@
 
 {% block content %}
 <h1 style="text-align: center; margin-bottom: 20px; color: #35D5D0; font-family: Arial, sans-serif;">Interests</h1>
+    <!-- Search Bar -->
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <form class="d-flex col-lg-8 col-md-10 col-11" role="search" action="{% url 'interests' %}">
+                <div class="form-floating flex-grow-1 me-2">
+                    <input 
+                        class="form-control" 
+                        id="floatingSearch" 
+                        name="q" 
+                        type="search" 
+                        placeholder="Enter your interest" 
+                        aria-label="Search interests">
+                    <label for="floatingSearch">Enter your interests to search</label>
+                </div>
+                <button class="btn btn-secondary ms-2 ms-sm-0" type="submit">Search Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
     {% for interest in interests %}
     <div style="width: 300px; border: 1px solid #35D5D0; border-radius: 5px; padding: 20px; background-color: white; text-align: center; font-family: Arial, sans-serif; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
