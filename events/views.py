@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Course, Event, Community
+from .models import Course, Event, Community, Rating, Ticket
 from categories.models import Interests
 
 # Create your views here.
 def events_courses(request):
     return HttpResponse("Hello, Events and Courses!")
+
+
 def course_list(request):
     interests = Interests.objects.all()
     selected_interest = None
