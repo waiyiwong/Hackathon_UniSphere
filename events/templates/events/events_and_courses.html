@@ -2,7 +2,29 @@
 
 {% block content %}
 
-<h1>Events, Courses, and Communities</h1>
+<h1>Search all Events, Courses, and Communities</h1>
+
+<!-- Search Bar -->
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+        <form class="d-flex col-lg-8 col-md-10 col-11" role="search" action="{% url 'eventsandcourses' %}">
+            <div class="form-floating flex-grow-1 me-2">
+                <input 
+                    class="form-control" 
+                    id="floatingSearch" 
+                    name="q" 
+                    type="search" 
+                    placeholder="Input Search" 
+                    aria-label="Input Search all Events, Courses, and Communities">
+                <label for="floatingSearch">Search an Event, Course, or Community</label>
+            </div>
+            <button class="btn btn-secondary ms-2 ms-sm-0" type="submit">Search Now</button>
+        </form>
+    </div>
+</div>
+</div>
+<br>
 
 <form method="GET">
     <select name="interest">

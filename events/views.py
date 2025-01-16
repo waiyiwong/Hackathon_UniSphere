@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Course, Event, Community, Rating, Ticket
 from categories.models import Interests
+from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
 def events_courses(request):
@@ -18,7 +20,26 @@ def events_and_courses(request):
         'events': events,
         'communities': communities,
     }
-    return render(request, 'events/events_and_courses.html', context)
+    
+    query = request.GET.get('q')
+    if query:
+        filtered_events = events.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+        filtered_courses = courses.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+        filtered_communities = communities.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+        context.update({
+            'events': filtered_events,
+            'courses': filtered_courses,
+            'communities': filtered_communities,
+        })
+        if not (filtered_events.exists() or filtered_courses.exists() or filtered_communities.exists()):
+            messages.info(request, "No results found.")
+    return render(request, 'events/events_and_courses.html', {'context': context, 'query': query})
 
 def course_list(request):
     interests = Interests.objects.all()
