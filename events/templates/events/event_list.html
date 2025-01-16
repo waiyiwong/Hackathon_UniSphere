@@ -2,10 +2,9 @@
 
 {% block content %}
 
-<h1>Courses</h1>
+<h1>Events</h1>
 
 <form method="GET">
-    {% csrf_token %}
     <select name="interest">
         <option value="">All Interests</option>
         {% for interest in interests %}
@@ -18,11 +17,14 @@
 </form>
 
 <ul>
-    {% for course in courses %}
+    {% for event in events %}
         <li>
-            <h2>{{ course.name }}</h2>
-            <p>{{ course.description }}</p>
-            </li>
+            <h2>{{ event.title }}</h2>
+            <p>Date: {{ event.event_date }}</p>
+            <p>Location: {{ event.location }}</p>
+            <p>Spaces: {{ event.spaces }}</p>
+            <p>Course: {{ event.course.name }}</p> </li>
     {% endfor %}
 </ul>
+
 {% endblock %}

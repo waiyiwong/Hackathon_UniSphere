@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Courses, Events, and Communities</h1>
+
+
+<form method="GET">
+    {% csrf_token %}
+    <select name="interest">
+        <option value="">All Interests</option>
+        {% for interest in interests %}
+            <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
+                {{ interest.name }}
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<h2>Courses</h2>
+<ul>
+  {% for course in courses %}
+  <li>
+    <h3>{{ course.name }}</h3>
+    <p>{{ course.description }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+<h2>Events</h2>
+<ul>
+  {% for event in events %}
+  <li>
+    <h3>{{ event.title }}</h3>
+    <p>Date: {{ event.event_date }}</p>
+    <p>Location: {{ event.location }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+<h2>Communities</h2>
+<ul>
+  {% for community in communities %}
+  <li>
+    <h3>{{ community.name }}</h3>
+    <p>{{ community.description | safe }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

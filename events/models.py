@@ -11,6 +11,11 @@ class Course(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
 
     def __str__(self):
         return self.name
@@ -27,6 +32,11 @@ class Event(models.Model):
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
 
     def __str__(self):
         return self.title
@@ -36,14 +46,39 @@ class Community(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = SummernoteTextField(blank=True)
     members = models.ManyToManyField(User, related_name='communities', blank=True)
-    interests = models.ManyToManyField(Interests, related_name='communities', blank=True)  # Use Interests directly
+    interests = models.ManyToManyField(Interests, related_name='communities', blank=True)
     image = CloudinaryField('image', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
 
     def __str__(self):
         return self.name
 
+class Ticket(models.Model):
+    ticket_holder = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="users_tickets"
+    )
+    date_issued = models.DateTimeField(auto_now_add=True)
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE,
+        related_name="event_tickets"
+    )
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"Ticket for {self.ticket_holder}"
 
 class Rating(models.Model):
     RATING_CHOICES = (
@@ -59,6 +94,11 @@ class Rating(models.Model):
     comment = models.TextField(blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='ratings')
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE, related_name='ratings')
+    approved = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
 
     def __str__(self):
         return f"Rating for {self.event.title} by {self.user.username}"
