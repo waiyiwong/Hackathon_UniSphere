@@ -30,5 +30,6 @@ urlpatterns = [
     path('', include('events.urls')),
     path("", include("home.urls"), name="home-urls"),
     path('profile/', profile_page, name='profile'),
+    path("accounts/", include("allauth.urls")),
 ]
 
