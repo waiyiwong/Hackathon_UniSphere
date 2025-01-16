@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 style="text-align: center; margin-bottom: 20px; color: orange; font-family: Arial, sans-serif;">Interests</h1>
+<h1 style="text-align: center; margin-bottom: 20px; color: #35D5D0; font-family: Arial, sans-serif;">Interests</h1>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
     {% for interest in interests %}
-    <div style="width: 300px; border: 1px solid orange; border-radius: 5px; padding: 20px; background-color: white; text-align: center; font-family: Arial, sans-serif; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <div style="width: 300px; border: 1px solid #35D5D0; border-radius: 5px; padding: 20px; background-color: white; text-align: center; font-family: Arial, sans-serif; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <h3 style="color: black; margin-bottom: 10px;">{{ interest.name }}</h3>
         <p style="color: #333; margin-bottom: 15px;">{{ interest.description | safe }}</p>
-        <a href="{% url 'posts_by_interests' interests.id %}" style="text-decoration: none; color: orange; font-weight: bold; display: inline-block; margin-bottom: 10px;">
-            View Posts in {{ interests.name }}
+        <a href="{% url 'eventsandcourses' %}">View Events, Courses, and Communities {{ interests.name }}</a>
         </a>
         </div>
     {% endfor %}
