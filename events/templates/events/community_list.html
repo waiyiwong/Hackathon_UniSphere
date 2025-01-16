@@ -5,6 +5,7 @@
 <h1>Communities</h1>
 
 <form method="GET">
+    {% csrf_token %}
     <select name="interest">
         <option value="">All Interests</option>
         {% for interest in interests %}
