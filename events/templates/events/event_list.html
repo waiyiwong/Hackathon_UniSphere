@@ -20,10 +20,13 @@
     {% for event in events %}
         <li>
             <h2>{{ event.title }}</h2>
+            <img src="{{ event.image.url }}" alt="{{ event.name }} image">
             <p>Date: {{ event.event_date }}</p>
             <p>Location: {{ event.location }}</p>
             <p>Spaces: {{ event.spaces }}</p>
-            <p>Course: {{ event.course.name }}</p> </li>
+            <p>Course: {{ event.course.name }}</p>
+            <p>Description: {{ event.description | safe }}</p>
+        </li>
     {% endfor %}
 </ul>
 
