@@ -2,11 +2,9 @@
 
 {% block content %}
 
-<h1> Events, Courses, and Communities</h1>
-
+<h1>Events, Courses, and Communities</h1>
 
 <form method="GET">
-    {% csrf_token %}
     <select name="interest">
         <option value="">All Interests</option>
         {% for interest in interests %}
@@ -18,38 +16,41 @@
     <button type="submit">Filter</button>
 </form>
 
-
 <h2>Events</h2>
 <ul>
-  {% for event in events %}
-  <li>
-    <h3>{{ event.title }}</h3>
-    <p>Date: {{ event.event_date }}</p>
-    <p>Location: {{ event.location }}</p>
-  </li>
-  {% endfor %}
+    {% for event in events %}
+        <li>
+            <h2>{{ event.title }}</h2>
+            <img src="{{ event.image.url }}" alt="{{ event.name }} image">
+            <p>Date: {{ event.event_date }}</p>
+            <p>Location: {{ event.location }}</p>
+            <p>Spaces: {{ event.spaces }}</p>
+            <p>Course: {{ event.course.name }}</p>
+            <p>Description: {{ event.description | safe }}</p>
+        </li>
+    {% endfor %}
 </ul>
-
 
 <h2>Courses</h2>
 <ul>
-  {% for course in courses %}
-  <li>
-    <h3>{{ course.name }}</h3>
-    <p>{{ course.description }}</p>
-  </li>
-  {% endfor %}
+    {% for course in courses %}
+        <li>
+            <h3>{{ course.name }}</h3>
+            <img src="{{ course.image.url }}" alt="{{ course.name }} image">
+            <p>{{ course.description | safe }}</p>
+        </li>
+    {% endfor %}
 </ul>
-
 
 <h2>Communities</h2>
 <ul>
-  {% for community in communities %}
-  <li>
-    <h3>{{ community.name }}</h3>
-    <p>{{ community.description | safe }}</p>
-  </li>
-  {% endfor %}
+    {% for community in communities %}
+        <li>
+            <h3>{{ community.name }}</h3>
+            <img src="{{ community.image.url }}" alt="{{ community.name }} image"> 
+            <p>{{ community.description | safe }}</p>
+        </li>
+    {% endfor %}
 </ul>
 
 {% endblock %}
