@@ -13,9 +13,9 @@
                 <p>Your gateway to connecting with students, events, and learning opportunities.</p>
             </div>
             <div class="home-button">
-                <button class="button home-button-blue">Browse Events</button>
-                <button class="button home-button-purple">Find Your Community</button>
-                <button class="button home-button-blue">Explore Courses</button>
+                <a href="{% url 'event_list' %}"><button class="button home-button-blue">Browse Events</button></a>
+                <a href="{% url 'community_list' %}"><button class="button home-button-purple">Find Your Community</button></a>
+                <a href="{% url 'course_list' %}"><button class="button home-button-blue">Explore Courses</button></a>
             </div>
     </header>
 </div>

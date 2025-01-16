@@ -57,13 +57,17 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'home' %}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == events_url %}active{% endif %}" aria-current="page"
-                            href="#">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == interests_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'interests' %}">Interests</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            All Events and Courses
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'event_list' %}">Events</a></li>
+                            <li><a class="dropdown-item" href="{% url 'community_list' %}">Communities</a></li>
+                            <li><a class="dropdown-item" href="{% url 'course_list' %}">Courses</a></li>
+                            <li><a class="dropdown-item" href="{% url 'interests' %}">Interests</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == about_url %}active{% endif %}" aria-current="page"
