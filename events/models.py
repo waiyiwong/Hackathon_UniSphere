@@ -8,7 +8,7 @@ from categories.models import Interests
 class Course(models.Model):
     name = models.CharField(max_length=255)
     image = CloudinaryField('image', blank=True)
-    description = SummernoteTextField()
+    description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
@@ -26,7 +26,7 @@ class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event_date = models.DateTimeField()
     image = CloudinaryField('image', blank=True)
-    description = SummernoteTextField(default='Describe Event')
+    description = models.TextField(default='Describe Event')
     location = models.CharField(max_length=255)
     spaces = models.IntegerField()
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE)
@@ -44,7 +44,7 @@ class Event(models.Model):
 
 class Community(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    description = SummernoteTextField(blank=True)
+    description = models.TextField(blank=True)
     members = models.ManyToManyField(User, related_name='communities', blank=True)
     interests = models.ManyToManyField(Interests, related_name='communities', blank=True)
     image = CloudinaryField('image', blank=True)
@@ -90,7 +90,7 @@ class Rating(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField(choices=RATING_CHOICES)
-    comment = SummernoteTextField(blank=True)
+    comment = models.TextField(blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='ratings')
     interests = models.ForeignKey(Interests, on_delete=models.CASCADE, related_name='ratings')
     approved = models.BooleanField(default=False)
