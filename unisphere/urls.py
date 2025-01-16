@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
 from events.views import events_and_courses
-from user_account.views import profile_page
+from user_account.views import profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +29,7 @@ urlpatterns = [
     path('eventsandcourses/', events_and_courses, name='eventsandcourses'),
     path('', include('events.urls')),
     path("", include("home.urls"), name="home-urls"),
-    path('profile/', profile_page, name='profile'),
+    path('profile/', profile, name='profile'),
     path("accounts/", include("allauth.urls")),
 ]
 

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ profile.user.username }}'s Profile</h1>
+
+{% if profile.profile_picture %}
+<img src="{{ profile.profile_picture | safe }}" alt="Profile Picture">
+{% endif %}
+
+{% if profile.bio %}
+<p>{{ profile.bio }}</p>
+{% endif %}
+
+<h2>Interests</h2>
+<ul>
+    {% for interest in profile.interests.all %}
+    <li>{{ interest.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Events</h2>
+<ul>
+    {% for event in profile.events.all %}
+    <li>{{ event.title }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Tickets</h2>
+<ul>
+    {% for ticket in profile.tickets.all %}
+    <li>{{ ticket }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Courses</h2>
+<ul>
+    {% for course in profile.courses.all %}
+    <li>{{ course.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Communities</h2>
+<ul>
+    {% for community in profile.communities.all %}
+    <li>{{ community.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Ratings</h2>
+<ul>
+    {% for rating in profile.ratings.all %}
+    <li>{{ rating }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
