@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <h1>Your Profile</h1>
+
+<p>Hello, {{ profile.user.username }}!</p> 
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Edit Profile</button>
+    <button type="submit">Update Profile</button>
 </form>
 
 {% endblock %}
