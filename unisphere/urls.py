@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
 from events.views import events_courses
-from account.views import profile_page
+from user_account.views import profile_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
