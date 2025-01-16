@@ -8,6 +8,18 @@ def events_courses(request):
     return HttpResponse("Hello, Events and Courses!")
 
 
+def events_and_courses(request):
+    events = Event.objects.all()
+    courses = Course.objects.all()
+    communities = Community.objects.all()
+
+    context = {
+        'courses': courses,
+        'events': events,
+        'communities': communities,
+    }
+    return render(request, 'events/events_and_courses.html', context)
+
 def course_list(request):
     interests = Interests.objects.all()
     selected_interest = None
@@ -58,15 +70,3 @@ def community_list(request):
     }
     return render(request, 'events/community_list.html', context)
 
-
-def courses_and_events(request):
-    courses = Course.objects.all()
-    events = Event.objects.all()
-    communities = Community.objects.all()
-
-    context = {
-        'courses': courses,
-        'events': events,
-        'communities': communities,
-    }
-    return render(request, 'events/courses_and_events.html', context)

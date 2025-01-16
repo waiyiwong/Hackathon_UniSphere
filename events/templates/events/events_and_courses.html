@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Courses, Events, and Communities</h1>
+<h1> Events, Courses, and Communities</h1>
 
 
 <form method="GET">
@@ -18,15 +18,6 @@
     <button type="submit">Filter</button>
 </form>
 
-<h2>Courses</h2>
-<ul>
-  {% for course in courses %}
-  <li>
-    <h3>{{ course.name }}</h3>
-    <p>{{ course.description }}</p>
-  </li>
-  {% endfor %}
-</ul>
 
 <h2>Events</h2>
 <ul>
@@ -38,6 +29,18 @@
   </li>
   {% endfor %}
 </ul>
+
+
+<h2>Courses</h2>
+<ul>
+  {% for course in courses %}
+  <li>
+    <h3>{{ course.name }}</h3>
+    <p>{{ course.description }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
 
 <h2>Communities</h2>
 <ul>
