@@ -1,5 +1,102 @@
+/* Homepage styling */
 .logo-img {
     width: 3em;
+}
+
+.home-hero-image{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.blue-h1 {
+    color:#1369A4;
+}
+
+/* Home-Buttons */
+.home-button {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+}
+
+.button {
+        display: inline-block;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+        transition: background-color 0.5s;
+}
+
+.home-button-blue {
+    background-color: #0D8AA6;
+}
+
+.home-button-blue:hover {
+    background-color: #36D9C8;
+}
+
+.home-button-purple {
+    background-color: #6C4ED9;
+}
+
+.home-button-purple:hover {
+    background-color: #9A41F2;
+}
+
+.home-main {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #9A41F2 0%, #545ABF 50%, #36D9C8 100%);
+    color: white;
+    margin-bottom: 40px;
+}
+
+ /* About section in Homepage */
+.home-about {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.home-about p {
+    color: #545b62;
+}
+
+.home-about h2 {
+    color: #545ABF;
+    margin-bottom: 1rem;
+}
+
+.home-card {
+    color: #545b62;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 3px rgba(0, 0, 0, 1);
+    margin: 10px;
+}
+
+.home-card ul {
+    list-style: none;
+}
+
+.home-card li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.home-h3 {
+    color: #1369A4;
 }
 
 body {
@@ -26,7 +123,7 @@ body {
 }
 
 .dark-bg {
-    background-color: #445261;
+    background-color: #1369A4;
 }
 
 .main-bg {
