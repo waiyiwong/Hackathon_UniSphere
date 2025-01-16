@@ -8,7 +8,7 @@ from events.models import Course, Event, Community, Rating, Ticket
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = SummernoteTextField(blank=True)
+    bio = models.TextField(blank=True)
     profile_picture = CloudinaryField('image', blank=True)
     interests = models.ManyToManyField(Interests, blank=True)
     courses = models.ManyToManyField(Course, blank=True)
