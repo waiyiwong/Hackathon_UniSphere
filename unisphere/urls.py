@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
 from events.views import events_courses
+from account.views import profile_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('eventsandcourses/', events_courses, name='eventsandcourses'),
     path("", include("home.urls"), name="home-urls"),
+    path('profile/', profile_page, name='profile'),
+
 ]
 
