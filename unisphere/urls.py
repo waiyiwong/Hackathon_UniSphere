@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
-from events.views import events_courses
+from events.views import events_and_courses
 from account.views import profile_page
 
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     path('interests/', categories, name='interests'),
     path("about/", include("about.urls"), name="about-urls"),
     path('summernote/', include('django_summernote.urls')),
-    path('eventsandcourses/', events_courses, name='eventsandcourses'),
+    path('eventsandcourses/', events_and_courses, name='eventsandcourses'),
     path('', include('events.urls')),
     path("", include("home.urls"), name="home-urls"),
     path('profile/', profile_page, name='profile'),

@@ -5,5 +5,5 @@ urlpatterns = [
     path('courses/', views.course_list, name='course_list'),
     path('events/', views.event_list, name='event_list'),
     path('communities/', views.community_list, name='community_list'),
-    path('coursesandevents/', views.courses_and_events, name='courses_and_events'),
+    path('eventsandcourses/', views.events_and_courses, name='eventsandcourses'),
 ]
