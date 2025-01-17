@@ -98,6 +98,12 @@
         {% if profile.profile_picture %}
         <img class="profile-picture" src="{{ profile.profile_picture | safe }}" alt="Profile Picture">
         {% endif %}
+        
+        {% if user.is_authenticated and has_permission %}
+        <li style="list-style-type: none;"><a href="{% url 'manage_items' %}">Manage Items</a></li>
+        {% endif %}
+
+        <br>
 
         {% if profile.bio %}
         <div class="bio">{{ profile.bio | safe }}</div>
