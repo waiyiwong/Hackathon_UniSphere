@@ -1,13 +1,102 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-<div class="container">
-    <div class="row text-center">
-        <h1>{{ profile.user.username|capfirst }}'s Profile</h1>
+    .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #545ABF;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 1rem auto;
+        border: 4px solid #6C4ED9;
+    }
+
+    .bio {
+        color: #666;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        line-height: 1.6;
+    }
+
+    .section {
+        margin: 2rem 0;
+    }
+
+    .section-title {
+        color: #0D8AA6;
+        border-bottom: 2px solid #36D9C8;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .item-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .item-list li {
+        background: #0D8AA6;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+    .empty-message {
+        color: #666;
+        font-style: italic;
+        text-align: center;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .manage-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        margin: 1rem 0;
+        transition: background-color 0.2s;
+    }
+
+    .manage-link:hover {
+        background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+</style>
+
+<div class="profile-container">
+    <div class="profile-header">
+        <h1 class="purple-h1">{{ profile.user.username|capfirst }}'s Profile</h1>
 
         {% if profile.profile_picture %}
-        <img src="{{ profile.profile_picture | safe }}" alt="Profile Picture">
+        <img class="profile-picture" src="{{ profile.profile_picture | safe }}" alt="Profile Picture">
         {% endif %}
         
         {% if user.is_authenticated and has_permission %}
@@ -17,76 +106,90 @@
         <br>
 
         {% if profile.bio %}
-        <h4>Bio:</h4>
-        <p>{{ profile.bio | safe }}</p>
+        <div class="bio">{{ profile.bio | safe }}</div>
         {% endif %}
 
-        <h2>Interests</h2>
+        {% if user.is_authenticated and has_permission %}
+        <a href="{% url 'manage_items' %}" class="manage-link">Manage Items</a>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Interests</h2>
         {% if profile.interests.all %}
-        <ul>
-            {% for interest in profile.interests.all %}
-            <li style="list-style-type: none;">{{ interest.name }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for interest in profile.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You are not currently enrolled in any interests.</p>
+            <p class="empty-message">You are not currently enrolled in any interests.</p>
         {% endif %}
+    </div>
 
-        <h2>Events</h2>
+    <div class="section">
+        <h2 class="section-title">Events</h2>
         {% if profile.events.all %}
-        <ul>
-            {% for event in profile.events.all %}
-            <li style="list-style-type: none;">{{ event.title }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for event in profile.events.all %}
+                <li>{{ event.title }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You are not currently enrolled in any events.</p>
+            <p class="empty-message">You are not currently enrolled in any events.</p>
         {% endif %}
+    </div>
 
-        <h2>Tickets</h2>
+    <div class="section">
+        <h2 class="section-title">Tickets</h2>
         {% if profile.tickets.all %}
-        <ul>
-            {% for ticket in profile.tickets.all %}
-            <li style="list-style-type: none;">{{ ticket }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for ticket in profile.tickets.all %}
+                <li>{{ ticket }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You have no tickets at the moment.</p>
+            <p class="empty-message">You have no tickets at the moment.</p>
         {% endif %}
+    </div>
 
-        <h2>Courses</h2>
+    <div class="section">
+        <h2 class="section-title">Courses</h2>
         {% if profile.courses.all %}
-        <ul>
-            {% for course in profile.courses.all %}
-            <li style="list-style-type: none;">{{ course.name }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for course in profile.courses.all %}
+                <li>{{ course.name }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You are not currently enrolled in any courses.</p>
+            <p class="empty-message">You are not currently enrolled in any courses.</p>
         {% endif %}
+    </div>
 
-        <h2>Communities</h2>
+    <div class="section">
+        <h2 class="section-title">Communities</h2>
         {% if profile.communities.all %}
-        <ul>
-            {% for community in profile.communities.all %}
-            <li style="list-style-type: none;">{{ community.name }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for community in profile.communities.all %}
+                <li>{{ community.name }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You are not currently a member of any communities.</p>
+            <p class="empty-message">You are not currently a member of any communities.</p>
         {% endif %}
+    </div>
 
-        <h2>Ratings</h2>
+    <div class="section">
+        <h2 class="section-title">Ratings</h2>
         {% if profile.ratings.all %}
-        <ul>
-            {% for rating in profile.ratings.all %}
-            <li style="list-style-type: none;">{{ rating }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="item-list">
+                {% for rating in profile.ratings.all %}
+                <li>{{ rating }}</li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <p>You have no ratings yet.</p>
+            <p class="empty-message">You have no ratings yet.</p>
         {% endif %}
     </div>
 </div>
-
 {% endblock %}
