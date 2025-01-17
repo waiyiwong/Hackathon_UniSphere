@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Interests
+from django.contrib import messages
 from django.db.models import Q
 
 # Create your views here.
@@ -28,7 +29,7 @@ def interests_list(request):
                 Q(description__icontains=query)
         )
         if not interests.exists():
-            messages.info(self.request,
+            messages.info(request,
                           "Entered interest not found.")
     else:
         interests = Interests.objects.all()
