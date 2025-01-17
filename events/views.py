@@ -14,11 +14,25 @@ def events_and_courses(request):
     events = Event.objects.all()
     courses = Course.objects.all()
     communities = Community.objects.all()
+    interests = Interests.objects.all()
+    selected_interest = None
+
+    if request.method == 'GET' and 'interest' in request.GET:
+        selected_interest_id = request.GET.get('interest')
+        if selected_interest_id:
+            selected_interest = get_object_or_404(Interests, pk=selected_interest_id)
+            courses = courses.filter(interests=selected_interest)
+            events = events.filter(interests=selected_interest)
+            communities = communities.filter(interests=selected_interest)
+        else:
+            selected_interest = None
 
     context = {
         'courses': courses,
         'events': events,
         'communities': communities,
+        'interests': interests,
+        'selected_interest': selected_interest,
     }
     
     query = request.GET.get('q')
