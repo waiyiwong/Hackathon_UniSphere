@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 style="text-align: center; margin-bottom: 20px; color: #35D5D0; font-family: Arial, sans-serif;">Interests</h1>
-    <!-- Search Bar -->
-    <div class="container-fluid">
-        <div class="row">
+<h1 class="blue-h1 text-center">Interests</h1>
+<!-- Search Bar -->
+<div class="container-fluid">
+    <div class="row">
         <div class="col-12 d-flex justify-content-center align-items-center">
             <form class="d-flex col-lg-8 col-md-10 col-11" role="search" action="{% url 'interests' %}">
-                <div class="form-floating flex-grow-1 me-2">
+                <div class="w-100">
                     <input 
                         class="form-control" 
-                        id="floatingSearch" 
                         name="q" 
                         type="search" 
                         placeholder="Enter your interest" 
                         aria-label="Search interests">
-                    <label for="floatingSearch">Enter your interests to search</label>
+                    <small class="form-text text-muted">Enter your interests to search</small>
                 </div>
-                <button class="btn btn-secondary ms-2 ms-sm-0" type="submit">Search Now</button>
+                <button class="nav-button-blue" type="submit">Search</button>
             </form>
         </div>
     </div>
 </div>
+
 <br>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
     {% for interest in interests %}
