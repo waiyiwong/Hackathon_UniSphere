@@ -36,10 +36,11 @@ def events_and_courses(request):
             'events': filtered_events,
             'courses': filtered_courses,
             'communities': filtered_communities,
+            'query': query,
         })
         if not (filtered_events.exists() or filtered_courses.exists() or filtered_communities.exists()):
             messages.info(request, "No results found.")
-    return render(request, 'events/events_and_courses.html', {'context': context, 'query': query})
+    return render(request, 'events/events_and_courses.html', context)
 
 def course_list(request):
     interests = Interests.objects.all()
