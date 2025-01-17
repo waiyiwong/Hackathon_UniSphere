@@ -7,6 +7,10 @@
 
         <p>Hello, {{ profile.user.username }}!</p>
 
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'manage_items' %}">Manage Items</a></li>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Manage Courses, Events, Communities, and Tickets</h1>  
+
+    <h2>Create Course</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ course_form.as_p }}
+        <button type="submit" name="create_course">Create Course</button>
+    </form>
+
+    <h2>Create Event</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ event_form.as_p }}
+        <button type="submit" name="create_event">Create Event</button>
+    </form>
+
+    <h2>Create Community</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ community_form.as_p }}
+        <button type="submit" name="create_community">Create Community</button>
+    </form>
+
+    <h2>Create Ticket</h2>  
+    <form method="post">
+        {% csrf_token %}
+        {{ ticket_form.as_p }}  
+        <button type="submit" name="create_ticket">Create Ticket</button>  
+    </form>
+
+    <h2>Courses</h2>
+    <ul>
+        {% for course in courses %}
+            <li>{{ course.name }} - <a href="{% url 'edit_course' course.id %}">Edit</a> - <a href="{% url 'delete_course' course.id %}">Delete</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Events</h2>
+    <ul>
+        {% for event in events %}
+            <li>{{ event.title }} - <a href="{% url 'edit_event' event.id %}">Edit</a> - <a href="{% url 'delete_event' event.id %}">Delete</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Communities</h2>
+    <ul>
+        {% for community in communities %}
+            <li>{{ community.name }} - <a href="{% url 'edit_community' community.id %}">Edit</a> - <a href="{% url 'delete_community' community.id %}">Delete</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Tickets</h2>  
+    <ul>
+        {% for ticket in tickets %}  
+            <li>{{ ticket }} - <a href="{% url 'edit_ticket' ticket.id %}">Edit</a> - <a href="{% url 'delete_ticket' ticket.id %}">Delete</a></li>  
+        {% endfor %}  
+    </ul>
+{% endblock %}
