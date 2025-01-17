@@ -11,6 +11,9 @@ from .forms import ProfileForm
 def profile(request):
     """View to display a user's profile to edit."""
     profile, created = Profile.objects.get_or_create(user=request.user)
+
+    
+
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
@@ -19,14 +22,22 @@ def profile(request):
             return redirect('view_profile', username=request.user.username)
     else:
         form = ProfileForm(instance=profile)
-    context = { 'form': form, 'profile': profile }
+    context = {
+        'form': form,
+        'profile': profile,
+        
+    }
     return render(request, 'user_account/profile.html', context)
 
 def view_profile(request, username):
     """View to display a user's profile."""
 
+    has_permission = request.user.groups.filter(name='Events Organiser').exists()
+    print('has_permission', has_permission)
+
     user_profile = get_object_or_404(Profile, user__username=username)
     context = {
         'profile': user_profile,
+        'has_permission': has_permission
     }
     return render(request, 'user_account/view_profile.html', context)
