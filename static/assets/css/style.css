@@ -14,6 +14,10 @@
     color:#0D8AA6;
 }
 
+.gradient-h1 {
+    color: #6C4ED9;
+}
+
 /* Home-Buttons */
 .home-button {
         display: flex;
