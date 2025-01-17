@@ -9,79 +9,82 @@
         {% if profile.profile_picture %}
         <img src="{{ profile.profile_picture | safe }}" alt="Profile Picture">
         {% endif %}
-
-        {% if profile.bio %}
-        <p>{{ profile.bio | safe }}</p>
+        
+        {% if user.is_authenticated and has_permission %}
+        <li style="list-style-type: none;"><a href="{% url 'manage_items' %}">Manage Items</a></li>
         {% endif %}
 
-        {% if user.is_authenticated and has_permission %}
-        <li><a href="{% url 'manage_items' %}">Manage Items</a></li>
+        <br>
+
+        {% if profile.bio %}
+        <h4>Bio:</h4>
+        <p>{{ profile.bio | safe }}</p>
         {% endif %}
 
         <h2>Interests</h2>
         {% if profile.interests.all %}
-            <ul>
-                {% for interest in profile.interests.all %}
-                <li>{{ interest.name }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for interest in profile.interests.all %}
+            <li style="list-style-type: none;">{{ interest.name }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You are not currently enrolled in any interests.</p>
+        <p>You are not currently enrolled in any interests.</p>
         {% endif %}
 
         <h2>Events</h2>
         {% if profile.events.all %}
-            <ul>
-                {% for event in profile.events.all %}
-                <li>{{ event.title }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for event in profile.events.all %}
+            <li style="list-style-type: none;">{{ event.title }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You are not currently enrolled in any events.</p>
+        <p>You are not currently enrolled in any events.</p>
         {% endif %}
 
         <h2>Tickets</h2>
         {% if profile.tickets.all %}
-            <ul>
-                {% for ticket in profile.tickets.all %}
-                <li>{{ ticket }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for ticket in profile.tickets.all %}
+            <li style="list-style-type: none;">{{ ticket }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You have no tickets at the moment.</p>
+        <p>You have no tickets at the moment.</p>
         {% endif %}
 
         <h2>Courses</h2>
         {% if profile.courses.all %}
-            <ul>
-                {% for course in profile.courses.all %}
-                <li>{{ course.name }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for course in profile.courses.all %}
+            <li style="list-style-type: none;">{{ course.name }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You are not currently enrolled in any courses.</p>
+        <p>You are not currently enrolled in any courses.</p>
         {% endif %}
 
         <h2>Communities</h2>
         {% if profile.communities.all %}
-            <ul>
-                {% for community in profile.communities.all %}
-                <li>{{ community.name }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for community in profile.communities.all %}
+            <li style="list-style-type: none;">{{ community.name }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You are not currently a member of any communities.</p>
+        <p>You are not currently a member of any communities.</p>
         {% endif %}
 
         <h2>Ratings</h2>
         {% if profile.ratings.all %}
-            <ul>
-                {% for rating in profile.ratings.all %}
-                <li>{{ rating }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for rating in profile.ratings.all %}
+            <li style="list-style-type: none;">{{ rating }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>You have no ratings yet.</p>
+        <p>You have no ratings yet.</p>
         {% endif %}
     </div>
 </div>

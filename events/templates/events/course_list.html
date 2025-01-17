@@ -16,9 +16,9 @@
     <button type="submit">Filter</button>
 </form>
 
-<ul>
+<ul style="list-style-type: none;">
     {% for course in courses %}
-        <li>
+        <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
             <h3>{{ course.name }}</h3>
             <img src="{{ course.image.url }}" alt="{{ course.name }} image">
             <p>{{ course.description | safe }}</p>

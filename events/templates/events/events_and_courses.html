@@ -34,9 +34,9 @@
 </form>
 
 <h2>Events</h2>
-<ul>
+<ul style="list-style-type: none;">
     {% for event in events %}
-    <li>
+    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
         <h2>{{ event.title }}</h2>
         <img src="{{ event.image.url }}" alt="{{ event.name }} image">
         <p>Date: {{ event.event_date }}</p>
@@ -49,9 +49,9 @@
 </ul>
 
 <h2>Courses</h2>
-<ul>
+<ul style="list-style-type: none;">
     {% for course in courses %}
-    <li>
+    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
         <h3>{{ course.name }}</h3>
         <img src="{{ course.image.url }}" alt="{{ course.name }} image">
         <p>{{ course.description | safe }}</p>
@@ -60,9 +60,9 @@
 </ul>
 
 <h2>Communities</h2>
-<ul>
+<ul style="list-style-type: none;">
     {% for community in communities %}
-    <li>
+    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
         <h3>{{ community.name }}</h3>
         <img src="{{ community.image.url }}" alt="{{ community.name }} image">
         <p>{{ community.description | safe }}</p>
