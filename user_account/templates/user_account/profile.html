@@ -11,7 +11,7 @@
         <li style="list-style-type: none;"><a href="{% url 'manage_items' %}">Manage Items</a></li>
         {% endif %}
 
-        <form method="post">
+        <form style="display: flex;" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Update Profile</button>
