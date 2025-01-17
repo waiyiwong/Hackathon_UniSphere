@@ -34,6 +34,20 @@
         transition: background-color 0.5s;
 }
 
+.nav-button-blue {
+    background-color: #0D8AA6;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.nav-button-blue:hover {
+    background-color: #36D9C8;
+}
+
 .home-button-blue {
     background-color: #0D8AA6;
 }
