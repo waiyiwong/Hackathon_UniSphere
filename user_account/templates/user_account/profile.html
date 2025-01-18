@@ -19,12 +19,10 @@
     }
 
     .item-list {
-        background: #0D8AA6;
-        color: white;
-        padding: 50px;
+        background: #F9FAFC;
+        padding: 2em;
         border-radius: 20px;
         text-align: center;
-        transition: transform 0.2s;
     }
 
     iframe {
@@ -48,12 +46,20 @@
     .manage-link {
         display: inline-block;
         background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
-        color: white;
+        color: white !important;
         padding: 0.75rem 1.5rem;
         border-radius: 6px;
         text-decoration: none;
         margin: 1rem 0;
         transition: background-color 0.2s;
+        border: none;
+        outline: none;
+    }
+
+    .manage-link:hover {
+        background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+        color: white;
+        transform: translateY(-2px);
     }
 
     /* Media query: tablets and larger (768px and up) */
@@ -112,14 +118,14 @@
 </style>
 
 
-<div class="container profile-container">
-    <div class="row text-center profile-header">
+<div class="profile-container">
+    <div class="profile-header">
         <h1>Your Profile</h1>
 
-        <p>Hello, {{ profile.user.username }}!</p>
+        <p>Hello, {{ profile.user.username|capfirst }}!</p>
 
         {% if user.is_authenticated %}
-        <li style="list-style-type: none;"><a href="{% url 'manage_items' %}">Manage Items</a></li>
+        <a href="{% url 'manage_items' %}" class="manage-link">Manage Items</a>
         {% endif %}
 
         <br>
