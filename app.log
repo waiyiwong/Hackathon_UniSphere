@@ -295,3 +295,4 @@ django.template.exceptions.TemplateDoesNotExist: bootstrap5/uni_form.html
 2025-01-18 05:46:35,142 - WARNING - Not Found: /favicon.ico
 2025-01-18 06:05:30,670 - INFO - /workspace/unisphere/events/views.py changed, reloading.
 2025-01-18 06:05:31,053 - INFO - Watching for file changes with StatReloader
+2025-01-18 09:46:32,187 - INFO - Watching for file changes with StatReloader
