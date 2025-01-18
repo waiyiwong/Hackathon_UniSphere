@@ -1,77 +1,202 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body {
+        background-color: #F9FAFC;
+        color: #333;
+        font-family: Arial, sans-serif;
+    }
 
-<h1>Search all Events, Courses, and Communities</h1>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
 
-<!-- Search Bar -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center">
-            <form class="d-flex col-lg-8 col-md-10 col-11" role="search" action="{% url 'eventsandcourses' %}">
-                <div class="w-100">
-                    <input 
-                        class="form-control" 
-                        name="q" 
-                        type="search" 
-                        placeholder="Enter an Event, Course, or Community to search" 
-                        aria-label="Search for an Event, Course, or Community">
-                    <small class="form-text text-muted">Search an Event, Course, or Community</small>
+    h1, h2 {
+        color: #545ABF;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .search-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #6C4ED9;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .nav-button-blue {
+        background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.2s, transform 0.2s;
+        border: none;
+        outline: none;
+    }
+
+    .nav-button-blue:hover {
+        background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+        transform: translateY(-2px);
+    }
+
+    .filter-form {
+        max-width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .filter-select {
+        padding: 0.5rem;
+        border: 2px solid #6C4ED9;
+        border-radius: 5px;
+        margin-right: 1rem;
+    }
+
+    .results-container {
+        margin-bottom: 2rem;
+    }
+
+    .result-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        height: 100%;
+    }
+
+    .result-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .result-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .result-content {
+        padding: 1.5rem;
+    }
+
+    .result-title {
+        color: #545ABF;
+        margin-bottom: 1rem;
+    }
+
+    .result-info {
+        color: #666;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 330px) {
+        .filter-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+</style>
+
+<div class="container">
+    <h1>Search all Events, Courses, and Communities</h1>
+
+    <div class="search-container">
+        <form class="search-form" role="search" action="{% url 'eventsandcourses' %}">
+            <input 
+                class="search-input"
+                name="q" 
+                type="search" 
+                placeholder="Enter an Event, Course, or Community to search" 
+                aria-label="Search for an Event, Course, or Community">
+            <small class="form-text text-muted">Search an Event, Course, or Community</small>
+            <button class="nav-button-blue" type="submit">Search</button>
+        </form>
+    </div>
+
+    <form class="filter-form" method="GET">
+        <select class="filter-select" name="interest">
+            <option value="">All Interests</option>
+            {% for interest in interests %}
+                <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
+                    {{ interest.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button class="nav-button-blue" type="submit">Filter</button>
+    </form>
+
+    <h2>Events</h2>
+    <div class="results-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for event in events %}
+            <div class="col">
+                <div class="result-card">
+                    <img class="result-image" src="{{ event.image.url }}" alt="{{ event.name }} image">
+                    <div class="result-content">
+                        <h3 class="result-title">{{ event.title }}</h3>
+                        <p class="result-info">Date: {{ event.event_date }}</p>
+                        <p class="result-info">Location: {{ event.location }}</p>
+                        <p class="result-info">Spaces: {{ event.spaces }}</p>
+                        <p class="result-info">Course: {{ event.course.name }}</p>
+                        <p class="result-info">Description: {{ event.description | safe }}</p>
+                    </div>
                 </div>
-                <button class="nav-button-blue" type="submit">Search</button>
-            </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2>Courses</h2>
+    <div class="results-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for course in courses %}
+            <div class="col">
+                <div class="result-card">
+                    <img class="result-image" src="{{ course.image.url }}" alt="{{ course.name }} image">
+                    <div class="result-content">
+                        <h3 class="result-title">{{ course.name }}</h3>
+                        <p class="result-info">{{ course.description | safe }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2>Communities</h2>
+    <div class="results-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for community in communities %}
+            <div class="col">
+                <div class="result-card">
+                    <img class="result-image" src="{{ community.image.url }}" alt="{{ community.name }} image">
+                    <div class="result-content">
+                        <h3 class="result-title">{{ community.name }}</h3>
+                        <p class="result-info">{{ community.description | safe }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-<br>
-
-<form method="GET">
-    <select name="interest">
-        <option value="">All Interests</option>
-        {% for interest in interests %}
-            <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
-                {{ interest.name }}
-            </option>
-        {% endfor %}
-    </select>
-    <button type="submit">Filter</button>
-</form>
-
-<h2>Events</h2>
-<ul style="list-style-type: none;">
-    {% for event in events %}
-    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
-        <h2>{{ event.title }}</h2>
-        <img src="{{ event.image.url }}" alt="{{ event.name }} image">
-        <p>Date: {{ event.event_date }}</p>
-        <p>Location: {{ event.location }}</p>
-        <p>Spaces: {{ event.spaces }}</p>
-        <p>Course: {{ event.course.name }}</p>
-        <p>Description: {{ event.description | safe }}</p>
-    </li>
-    {% endfor %}
-</ul>
-
-<h2>Courses</h2>
-<ul style="list-style-type: none;">
-    {% for course in courses %}
-    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
-        <h3>{{ course.name }}</h3>
-        <img src="{{ course.image.url }}" alt="{{ course.name }} image">
-        <p>{{ course.description | safe }}</p>
-    </li>
-    {% endfor %}
-</ul>
-
-<h2>Communities</h2>
-<ul style="list-style-type: none;">
-    {% for community in communities %}
-    <li style="display: flex; align-items: flex-start; flex-direction: column; color: #000000; background: #7ccfeb; border-radius: 8px; padding: 24px; box-shadow: 3px rgba(0, 0, 0, 1); margin: 10px; width: 500px;">
-        <h3>{{ community.name }}</h3>
-        <img src="{{ community.image.url }}" alt="{{ community.name }} image">
-        <p>{{ community.description | safe }}</p>
-    </li>
-    {% endfor %}
-</ul>
-
 {% endblock %}

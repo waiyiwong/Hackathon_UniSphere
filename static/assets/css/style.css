@@ -18,6 +18,10 @@
     color: #6C4ED9;
 }
 
+.gradient-bg {
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+}
+
 /* Home-Buttons */
 .home-button {
         display: flex;
