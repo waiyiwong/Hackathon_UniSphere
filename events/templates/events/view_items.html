@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #545ABF;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 1rem auto;
+        border: 4px solid #6C4ED9;
+    }
+
+    .bio {
+        color: #666;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        line-height: 1.6;
+    }
+
+    .section {
+        margin: 2rem 0;
+    }
+
+    .section-title {
+        color: #0D8AA6;
+        border-bottom: 2px solid #36D9C8;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .item-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .item-list li {
+        background: #0D8AA6;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+    .empty-message {
+        color: #666;
+        font-style: italic;
+        text-align: center;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .manage-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        margin: 1rem 0;
+        transition: background-color 0.2s;
+        border: 1px solid white;
+    }
+
+    .manage-link:hover {
+        background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .form-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .form-field {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4">View Items</h2>
+
+    <h3>Events</h3>
+    {% if events %}
+    <div class="row">
+        {% for event in events %}
+        <div class="col-md-4">
+            <div class="event-card">
+                {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }} image" class="event-image">
+                {% endif %}
+                <h3 class="event-title">{{ event.title }}</h3>
+                <div class="event-details">
+                    <p><strong>Date:</strong> {{ event.event_date }}</p>
+                    <p><strong>Location:</strong> {{ event.location }}</p>
+                    <p><strong>Spaces:</strong> {{ event.spaces }}</p>
+                    <p><strong>Interests:</strong> {{ event.interests.name }}</p>
+                    <p><strong>Course:</strong> {{ event.course.name }}</p>
+                </div>
+                <div class="event-actions">
+                    <a href="{% url 'edit_event' event.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_event' event.id %}" class="btn btn-danger">Delete</a>
+                </div>
+
+                <h4>Reviews</h4>
+                {% for rating in event.ratings.all %}
+                <div class="review">
+                    <p><strong>{{ rating.user.username }}:</strong> {{ rating.rating }} stars - {{ rating.comment }}</p>
+                </div>
+                {% endfor %}
+
+                <h4>Add a Review</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ rating_form.as_p }}
+                    <input type="hidden" name="event_id" value="{{ event.id }}">
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No events found.</p>
+    {% endif %}
+
+    <h3>Courses</h3>
+    {% if courses %}
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-md-4">
+            <div class="event-card">
+                {% if course.image %}
+                <img src="{{ course.image.url }}" alt="{{ course.name }} image" class="event-image">
+                {% endif %}
+                <h3 class="event-title">{{ course.name }}</h3>
+                <div class="event-details">
+                    <p><strong>Description:</strong> {{ course.description }}</p>
+                    <p><strong>Interests:</strong> {{ course.interests.name }}</p>
+                </div>
+                <div class="event-actions">
+                    <a href="{% url 'edit_course' course.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">Delete</a>
+                </div>
+
+                <h4>Reviews</h4>
+                {% for rating in course.ratings.all %}
+                <div class="review">
+                    <p><strong>{{ rating.user.username }}:</strong> {{ rating.rating }} stars - {{ rating.comment }}</p>
+                </div>
+                {% endfor %}
+
+                <h4>Add a Review</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ rating_form.as_p }}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No courses found.</p>
+    {% endif %}
+
+    <h3>Communities</h3>
+    {% if communities %}
+    <div class="row">
+        {% for community in communities %}
+        <div class="col-md-4">
+            <div class="event-card">
+                {% if community.image %}
+                <img src="{{ community.image.url }}" alt="{{ community.name }} image" class="event-image">
+                {% endif %}
+                <h3 class="event-title">{{ community.name }}</h3>
+                <div class="event-details">
+                    <p><strong>Description:</strong> {{ community.description }}</p>
+                </div>
+                <div class="event-actions">
+                    <a href="{% url 'edit_community' community.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_community' community.id %}" class="btn btn-danger">Delete</a>
+                </div>
+
+                <h4>Reviews</h4>
+                {% for rating in community.ratings.all %}
+                <div class="review">
+                    <p><strong>{{ rating.user.username }}:</strong> {{ rating.rating }} stars - {{ rating.comment }}</p>
+                </div>
+                {% endfor %}
+
+                <h4>Add a Review</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ rating_form.as_p }}
+                    <input type="hidden" name="community_id" value="{{ community.id }}">
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No communities found.</p>
+    {% endif %}
+
+    <h3>Tickets</h3>
+    {% if tickets %}
+    <div class="row">
+        {% for ticket in tickets %}
+        <div class="col-md-4">
+            <div class="event-card">
+                <h3 class="event-title">Ticket for {{ ticket.ticket_holder.username }}</h3>
+                <div class="event-details">
+                    <p><strong>Event:</strong> {{ ticket.event.title }}</p>
+                    <p><strong>Date Issued:</strong> {{ ticket.date_issued }}</p>
+                </div>
+                <div class="event-actions">
+                    <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_ticket' ticket.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No tickets found.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

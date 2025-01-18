@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Event, Community, Ticket, Interests
+from .models import Course, Event, Community, Ticket, Interests, Rating
 
 
 class EventForm(forms.ModelForm):
@@ -36,3 +36,10 @@ class CourseEditForm(forms.ModelForm):
             'end_date': forms.DateInput(attrs={'type': 'date'}),
         }
 
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['rating', 'comment']
+        widgets = {
+            'comment': forms.Textarea(attrs={'rows': 3}),
+        }
