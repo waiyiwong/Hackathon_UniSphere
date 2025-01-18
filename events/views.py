@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from .models import Course, Event, Community, Rating, Ticket
-from .forms import CourseForm, EventForm, CommunityForm, TicketForm
+from .forms import CourseForm, EventForm, CommunityForm, TicketForm, CourseEditForm
 from categories.models import Interests
 from django.db.models import Q
 from django.contrib import messages
@@ -129,6 +129,10 @@ def manage_items(request):
             course_form = CourseForm(request.POST)
             if course_form.is_valid():
                 course_form.save()
+                messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Course creation successfully!')
                 return redirect('manage_items')
 
         if 'create_event' in request.POST:

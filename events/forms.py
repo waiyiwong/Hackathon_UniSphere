@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Event, Community, Ticket
+from .models import Course, Event, Community, Ticket, Interests
 
 
 class EventForm(forms.ModelForm):
@@ -24,3 +24,15 @@ class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = '__all__'
+
+class CourseEditForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = '__all__'
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+            'interests': forms.Select(choices=Interests.objects.all().values_list('id', 'name')),
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+

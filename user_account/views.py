@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -18,6 +19,11 @@ def profile(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
+            messages.add_message(
+            request, 
+            messages.SUCCESS,
+            'Your profile has been submitted!'
+    )
             print(redirect('view_profile', username=request.user.username))
             return redirect('view_profile', username=request.user.username)
     else:
