@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+  .profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #545ABF;
+  }
+
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem auto;
+    border: 4px solid #6C4ED9;
+  }
+
+  .bio {
+    color: #666;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+
+  .section {
+    margin: 2rem 0;
+  }
+
+  .section-title {
+    color: #0D8AA6;
+    border-bottom: 2px solid #36D9C8;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .item-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 1rem;
+  }
+
+  .item-list li {
+    background: #0D8AA6;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .empty-message {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .manage-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: background-color 0.2s;
+    border: 1px solid white;
+  }
+
+  .manage-link:hover {
+    background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+    color: white;
+    transform: translateY(-2px); 
+  }
+
+  .form-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .form-field {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+  }
+
+  /* Add more specific styles for the form if needed */
+  .my-form input[type="text"],
+  .my-form textarea {
+    border-color: #007bff; 
+  }
+
+  .btn-primary {  /* Target the .btn-primary class */
+    background-color: #0D8AA6; 
+    border-color: #0D8AA6; 
+  }
+
+  .btn-primary:hover {
+    background-color: #6C4ED9; 
+    border-color: #6C4ED9; 
+  }
+</style>
+
+<div class="container mt-5 profile-container"> 
+  <h2 class="mb-4">Edit Event, Course, Community or Ticket</h2>
+  <form method="POST" enctype="multipart/form-data" class="my-form"> 
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>
+</div>
+
+{% endblock %}

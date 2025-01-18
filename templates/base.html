@@ -63,9 +63,10 @@
                             All Events and Courses
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'eventsandcourses' %}">View All</a></li>
                             <li><a class="dropdown-item" href="{% url 'event_list' %}">Events</a></li>
-                            <li><a class="dropdown-item" href="{% url 'community_list' %}">Communities</a></li>
                             <li><a class="dropdown-item" href="{% url 'course_list' %}">Courses</a></li>
+                            <li><a class="dropdown-item" href="{% url 'community_list' %}">Communities</a></li>
                             <li><a class="dropdown-item" href="{% url 'interests' %}">Interests</a></li>
                         </ul>
                     </li>
@@ -83,6 +84,7 @@
                             <li><a class="dropdown-item" href="{% url 'view_profile' user.username %}">View Profile</a>
                             </li>
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'manage_items' %}">Manage Items</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -99,7 +101,8 @@
                             href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
-                    <li  class="nav-item"><a class="nav-link" href="{% url 'eventsandcourses' %}"><button class="nav-button-blue" role="button">Search</button></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'eventsandcourses' %}"><button
+                                class="nav-button-blue" role="button">Search</button></a></li>
                 </ul>
 
                 {% if user.is_authenticated %}
@@ -112,10 +115,25 @@
                     UniSphere: Unite and Build Your Uni Circle
                 </span>
                 {% endif %}
-                
+
             </div>
         </div>
     </nav>
+
+    <!-- displaying Django messages -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible
+                    fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <main class="flex-shrink-0 main-bg">
         {% if user.is_authenticated %}
