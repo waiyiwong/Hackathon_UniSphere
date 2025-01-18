@@ -3,6 +3,10 @@
     width: 3em;
 }
 
+.home-msg {
+    color: #545b62;
+}
+
 .home-hero-image{
     display: block;
     max-width: 100%;
