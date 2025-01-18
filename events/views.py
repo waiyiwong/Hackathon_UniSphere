@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from .models import Course, Event, Community, Rating, Ticket
@@ -183,7 +183,7 @@ def create_event(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Event created successfully!')
-            return redirect('events:view_items')
+            return redirect('manage_items')
     else:
         form = EventForm()
     return render(request, 'events/create_event.html', {'form': form})
@@ -305,47 +305,6 @@ def delete_ticket(request, ticket_id):
                     messages.SUCCESS, 
                     'Ticket delete successfull!')
     return redirect('manage_items')
-
-
-def view_items(request):
-    events = Event.objects.all().prefetch_related('ratings')
-    courses = Course.objects.all()
-    communities = Community.objects.all()
-    tickets = Ticket.objects.all()
-
-    if request.method == 'POST':
-        rating_form = RatingForm(request.POST)
-        if rating_form.is_valid():
-            rating = rating_form.save(commit=False)
-            rating.user = request.user
-            # Get the ID of the event/course/community to associate the rating with
-            # (You'll need to adjust this based on your form structure)
-            event_id = request.POST.get('event_id')
-            course_id = request.POST.get('course_id')
-            community_id = request.POST.get('community_id')
-
-            if event_id:
-                rating.event = get_object_or_404(Event, pk=event_id)
-            elif course_id:
-                rating.course = get_object_or_404(Course, pk=course_id)
-            elif community_id:
-                rating.community = get_object_or_404(Community, pk=community_id)
-
-            rating.save()
-            messages.success(request, 'Your rating has been submitted!')
-            return redirect('view_items')
-    else:
-        rating_form = RatingForm()
-
-    context = {
-        'events': events,
-        'courses': courses,
-        'communities': communities,
-        'tickets': tickets,
-        'rating_form': rating_form,
-    }
-    return render(request, 'events/view_items.html', context)
-
 
 def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
