@@ -117,6 +117,7 @@ def manage_items(request):
     courses = Course.objects.all()
     events = Event.objects.all()
     communities = Community.objects.all()
+    tickets = Ticket.objects.all()
 
     course_form = CourseForm()
     event_form = EventForm()
@@ -152,6 +153,7 @@ def manage_items(request):
         'courses': courses,
         'events': events,
         'communities': communities,
+        'tickets': tickets,
         'course_form': course_form,
         'event_form': event_form,
         'community_form': community_form,

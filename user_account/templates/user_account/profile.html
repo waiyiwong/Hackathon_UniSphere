@@ -1,8 +1,119 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row text-center">
+
+<style>
+    .profile-container {
+        max-width: auto;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #545ABF;
+    }
+
+    .item-list {
+        background: #0D8AA6;
+        color: white;
+        padding: 50px;
+        border-radius: 20px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+    iframe {
+        width: auto;
+        padding: 10px;
+    }
+
+    .boxplacement {
+        padding-top: 40px;
+    }
+
+    #id_ratings {
+        width: auto;
+    }
+
+    .scrollable-box {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .manage-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        margin: 1rem 0;
+        transition: background-color 0.2s;
+    }
+
+    /* Media query: tablets and larger (768px and up) */
+    @media screen and (min-width: 768px) {
+
+        iframe {
+            width: 650px;
+            padding: 10px;
+        }
+
+        #id_ratings {
+            width: 200px;
+        }
+
+        #id_events {
+            width: 200px;
+        }
+
+        #id_courses {
+            width: 200px;
+        }
+
+        #id_communities {
+            width: 200px;
+        }
+    }
+
+    /* Media query: tablets and larger (1200px and up) */
+    @media screen and (min-width: 1200px) {
+        
+        iframe {
+            width: 750px;
+            padding: 10px;
+        }
+
+        #id_ratings {
+            width: 300px;
+        }
+
+        #id_events {
+            width: 200px;
+        }
+
+        #id_courses {
+            width: 200px;
+        }
+
+        #id_communities {
+            width: 200px;
+        }
+    }
+
+    /* Media query: tablets and larger (2000px and up) */
+    @media screen and (min-width: 2000px) {}
+
+</style>
+
+
+<div class="container profile-container">
+    <div class="row text-center profile-header">
         <h1>Your Profile</h1>
 
         <p>Hello, {{ profile.user.username }}!</p>
@@ -11,10 +122,32 @@
         <li style="list-style-type: none;"><a href="{% url 'manage_items' %}">Manage Items</a></li>
         {% endif %}
 
-        <form style="display: flex;" method="post">
+        <br>
+
+        <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Update Profile</button>
+
+            <div class="row">
+                <div class="col-md-12 boxplacement">
+                    {{ form.profile_picture }}
+                    {{ form.bio }}
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 boxplacement item-list">{{ form.interests }}</div>
+                <div class="col-md-4 boxplacement item-list">{{ form.courses }}</div>
+                <div class="col-md-4 boxplacement item-list">{{ form.communities }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 boxplacement item-list scrollable-box">{{ form.events }}</div>
+                <div class="col-md-4 boxplacement item-list">{{ form.tickets }}</div>
+                <div class="col-md-4 boxplacement item-list scrollable-box">{{ form.ratings }}</div>
+            </div>
+
+            <button class="manage-link" type="submit">Update Profile</button>
         </form>
     </div>
 </div>
