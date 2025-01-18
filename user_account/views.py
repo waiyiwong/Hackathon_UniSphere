@@ -14,7 +14,6 @@ def profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
 
     
-
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
@@ -22,7 +21,7 @@ def profile(request):
             messages.add_message(
             request, 
             messages.SUCCESS,
-            'Your profile has been submitted!'
+            'Your profile has been edited!'
     )
             print(redirect('view_profile', username=request.user.username))
             return redirect('view_profile', username=request.user.username)

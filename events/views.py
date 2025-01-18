@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from .models import Course, Event, Community, Rating, Ticket
-from .forms import CourseForm, EventForm, CommunityForm, TicketForm, CourseEditForm
+from .forms import CourseForm, EventForm, CommunityForm, TicketForm, CourseEditForm, RatingForm
 from categories.models import Interests
 from django.db.models import Q
 from django.contrib import messages
@@ -132,25 +132,37 @@ def manage_items(request):
                 messages.add_message(
                     request, 
                     messages.SUCCESS, 
-                    'Course creation successfully!')
+                    'Course creation successfull!')
                 return redirect('manage_items')
 
         if 'create_event' in request.POST:
             event_form = EventForm(request.POST)
             if event_form.is_valid():
                 event_form.save()
+                messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Event creation successfull!')
                 return redirect('manage_items')
 
         if 'create_community' in request.POST:
             community_form = CommunityForm(request.POST)
             if community_form.is_valid():
                 community_form.save()
+                messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Community creation successfull!')
                 return redirect('manage_items')
         
         if 'create_ticket' in request.POST:
             ticket_form = TicketForm(request.POST)
             if ticket_form.is_valid():
                 ticket_form.save()
+                messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Ticket creation successfull!')
                 return redirect('manage_items')
 
     context = {
@@ -165,6 +177,16 @@ def manage_items(request):
     }
     return render(request, 'events/manage_items.html', context)
 
+def create_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event created successfully!')
+            return redirect('events:view_items')
+    else:
+        form = EventForm()
+    return render(request, 'events/create_event.html', {'form': form})
 
 @login_required
 @user_passes_test(lambda user: user.groups.filter(name='Events Organiser').exists())
@@ -174,6 +196,10 @@ def edit_course(request, course_id):
         form = CourseForm(request.POST, instance=course)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Course edit successfull!')
             return redirect('manage_items')
     else:
         form = CourseForm(instance=course)
@@ -185,6 +211,10 @@ def edit_course(request, course_id):
 def delete_course(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     course.delete()
+    messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Course delete successfull!')
     return redirect('manage_items')
 
 
@@ -196,6 +226,10 @@ def edit_event(request, event_id):
         form = EventForm(request.POST, instance=event)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Event edit successfull!')
             return redirect('manage_items')
     else:
         form = EventForm(instance=event)
@@ -207,6 +241,10 @@ def edit_event(request, event_id):
 def delete_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     event.delete()
+    messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Event delete successfull!')
     return redirect('manage_items')
 
 
@@ -218,6 +256,10 @@ def edit_community(request, community_id):
         form = CommunityForm(request.POST, instance=community)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Community edit successfull!')
             return redirect('manage_items')
     else:
         form = CommunityForm(instance=community)
@@ -229,6 +271,10 @@ def edit_community(request, community_id):
 def delete_community(request, community_id):
     community = get_object_or_404(Community, pk=community_id)
     community.delete()
+    messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Community delete successfull!')
     return redirect('manage_items')
 
 @login_required
@@ -239,6 +285,10 @@ def edit_ticket(request, ticket_id):
         form = TicketForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Ticket edit successfull!')
             return redirect('manage_items')
     else:
         form = TicketForm(instance=ticket)
@@ -250,4 +300,54 @@ def edit_ticket(request, ticket_id):
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
     ticket.delete()
+    messages.add_message(
+                    request, 
+                    messages.SUCCESS, 
+                    'Ticket delete successfull!')
     return redirect('manage_items')
+
+
+def view_items(request):
+    events = Event.objects.all().prefetch_related('ratings')
+    courses = Course.objects.all()
+    communities = Community.objects.all()
+    tickets = Ticket.objects.all()
+
+    if request.method == 'POST':
+        rating_form = RatingForm(request.POST)
+        if rating_form.is_valid():
+            rating = rating_form.save(commit=False)
+            rating.user = request.user
+            # Get the ID of the event/course/community to associate the rating with
+            # (You'll need to adjust this based on your form structure)
+            event_id = request.POST.get('event_id')
+            course_id = request.POST.get('course_id')
+            community_id = request.POST.get('community_id')
+
+            if event_id:
+                rating.event = get_object_or_404(Event, pk=event_id)
+            elif course_id:
+                rating.course = get_object_or_404(Course, pk=course_id)
+            elif community_id:
+                rating.community = get_object_or_404(Community, pk=community_id)
+
+            rating.save()
+            messages.success(request, 'Your rating has been submitted!')
+            return redirect('view_items')
+    else:
+        rating_form = RatingForm()
+
+    context = {
+        'events': events,
+        'courses': courses,
+        'communities': communities,
+        'tickets': tickets,
+        'rating_form': rating_form,
+    }
+    return render(request, 'events/view_items.html', context)
+
+
+def event_detail(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    context = {'event': event}
+    return render(request, 'events/event_detail.html', context)

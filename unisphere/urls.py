@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from categories.views import categories
 from events.views import events_and_courses
+from events.views import event_list
 from user_account.views import profile
 
 urlpatterns = [

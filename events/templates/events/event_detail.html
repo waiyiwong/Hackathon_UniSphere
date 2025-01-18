@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  .event-detail-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .event-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .event-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .event-details {
+    margin-bottom: 15px;
+  }
+
+  .btn-primary {
+    background-color: #0D8AA6;
+    border-color: #0D8AA6;
+  }
+
+  .btn-primary:hover {
+    background-color: #6C4ED9;
+    border-color: #6C4ED9;
+  }
+</style>
+
+<div class="container mt-5 event-detail-container">
+
+  {% if event %}
+  <h2 class="event-title">{{ event.title }}</h2>
+
+  {% if event.image %}
+  <img src="{{ event.image.url }}" alt="{{ event.title }} image" class="event-image">
+  {% endif %}
+
+  <div class="event-details">
+    <p><strong>Date:</strong> {{ event.event_date }}</p>
+    <p><strong>Location:</strong> {{ event.location }}</p>
+    <p><strong>Spaces:</strong> {{ event.spaces }}</p>
+    <p><strong>Interests:</strong> {{ event.interests.name }}</p>
+    <p><strong>Course:</strong> {{ event.course.name }}</p>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+  </div>
+
+  <div class="event-actions">
+    <a href="{% url 'events:edit_event' event.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'events:delete_event' event.id %}" class="btn btn-danger">Delete</a>
+  </div>
+
+  {% else %}
+  <p>Event not found.</p>
+  {% endif %}
+
+</div>
+
+{% endblock %}
