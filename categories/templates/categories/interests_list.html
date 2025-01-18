@@ -1,15 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="blue-h1 text-center">Interests</h1>
+<style>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+h1 {
+    color: #545ABF;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    padding: 0.75rem;
+    border: 2px solid #6C4ED9;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button-blue {
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+    border: none;
+    outline: none;
+}
+
+.nav-button-blue:hover {
+    color: white;
+    background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+    transform: translateY(-2px);
+}
+
+.results-container {
+    margin-bottom: 2rem;
+}
+
+.result-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    padding: 1.5rem;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+.result-title {
+    color: #545ABF;
+    margin-bottom: 1rem;
+}
+
+.result-info {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 330px) {
+    .search-form-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+</style>
+
+<h1>Interests</h1>
+
 <!-- Search Bar -->
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center">
-            <form class="d-flex col-lg-8 col-md-10 col-11" role="search" action="{% url 'interests' %}">
+        <div class="col-12 d-flex justify-content-center align-items-center search-form">
+            <form class="d-flex col-lg-8 col-md-10 col-11 search-form-flex" role="search" action="{% url 'interests' %}">
                 <div class="w-100">
                     <input 
-                        class="form-control" 
+                        class="form-control search-input" 
                         name="q" 
                         type="search" 
                         placeholder="Enter your interest" 
@@ -23,14 +107,17 @@
 </div>
 
 <br>
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-    {% for interest in interests %}
-    <div style="width: 300px; border: 1px solid #35D5D0; border-radius: 5px; padding: 20px; background-color: white; text-align: center; font-family: Arial, sans-serif; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-        <h3 style="color: black; margin-bottom: 10px;">{{ interest.name }}</h3>
-        <p style="color: #333; margin-bottom: 15px;">{{ interest.description | safe }}</p>
-        <a href="{% url 'eventsandcourses' %}">View Events, Courses, and Communities {{ interests.name }}</a>
-        </a>
+<div class="results-container container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        {% for interest in interests %}
+        <div class="col">
+            <div class="result-card">
+                <h3 class="result-title">{{ interest.name }}</h3>
+                <p class="result-info">{{ interest.description | safe }}</p>
+                <a href="{% url 'eventsandcourses' %}" class="nav-button-blue">View Events, Courses, and Communities</a>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
