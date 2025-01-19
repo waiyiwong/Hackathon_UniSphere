@@ -163,11 +163,11 @@ The site is designed to be responsive across all device sizes using Bootstrap 5.
 ### 5. Surface Plane
 
 #### 5.1 Wireframes:
-![Wireframes](static/images/wireframe_home.png)
-![Wireframes](static/images/wireframe_home2.png)
-![Wireframes](static/images/wireframe_signin.png)
-![Wireframes](static/images/wireframe_event.png)
-![Wireframes](static/images/wireframe_about.png)
+![Wireframes](static/assets/images/wireframe_home.png)
+![Wireframes](static/assets/images/wireframe_home2.png)
+![Wireframes](static/assets/images/wireframe_signin.png)
+![Wireframes](static/assets/images/wireframe_event.png)
+![Wireframes](static/assets/images/wireframe_about.png)
 
 #### 5.2 Color Scheme:
 The site uses a professional and modern color scheme to match the academic nature of the platform.
