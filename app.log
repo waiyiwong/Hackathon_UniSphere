@@ -1710,3 +1710,9 @@ Traceback (most recent call last):
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'event_list' not found. 'event_list' is not a valid view function or pattern name.
 2025-01-18 09:36:29,635 - WARNING - Not Found: /favicon.ico
+2025-01-19 14:44:10,096 - INFO - /workspace/unisphere/events/views.py changed, reloading.
+2025-01-19 14:44:10,484 - INFO - Watching for file changes with StatReloader
+2025-01-19 14:50:32,569 - INFO - /workspace/unisphere/events/views.py changed, reloading.
+2025-01-19 14:50:32,960 - INFO - Watching for file changes with StatReloader
+2025-01-19 14:50:43,618 - INFO - /workspace/unisphere/events/views.py changed, reloading.
+2025-01-19 14:50:44,004 - INFO - Watching for file changes with StatReloader

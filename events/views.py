@@ -29,6 +29,10 @@ def events_and_courses(request):
             communities = communities.filter(interests=selected_interest)
         else:
             selected_interest = None
+            
+    for event in events:
+        average_rating = event.ratings.aggregate(Avg('rating'))['rating__avg'] or 0.0
+        event.average_rating = average_rating
 
     context = {
         'courses': courses,
@@ -82,7 +86,6 @@ def event_list(request):
     events = Event.objects.all()
     
     for event in events:
-        # Calculate the average rating for the event
         average_rating = event.ratings.aggregate(Avg('rating'))['rating__avg'] or 0.0
         event.average_rating = average_rating
         event.user_has_approved_ticket = Ticket.objects.filter(ticket_holder=request.user, event=event, approved=True).exists()
