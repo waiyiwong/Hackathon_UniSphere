@@ -164,14 +164,19 @@ The site is designed to be responsive across all device sizes using Bootstrap 5.
 ### 5. Surface Plane
 
 #### 5.1 Wireframes:
+
 Home page
 ![Wireframes](static/assets/images/wireframe_home.png)
+
 Home page 2
 ![Wireframes](static/assets/images/wireframe_home2.png)
+
 Sign in page
 ![Wireframes](static/assets/images/wireframe_signin.png)
+
 Events page
 ![Wireframes](static/assets/images/wireframe_event.png)
+
 About page
 ![Wireframes](static/assets/images/wireframe_about.png)
 
