@@ -51,3 +51,4 @@ Traceback (most recent call last):
 TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7ff817940f50>>.
 2025-01-19 15:33:14,509 - INFO - /workspace/Hackathon_UniSphere/events/views.py changed, reloading.
 2025-01-19 15:33:14,961 - INFO - Watching for file changes with StatReloader
+2025-01-19 15:50:27,868 - INFO - Watching for file changes with StatReloader
