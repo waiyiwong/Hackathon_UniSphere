@@ -151,6 +151,10 @@
                         <p class="result-info">Location: {{ event.location }}</p>
                         <p class="result-info">Spaces: {{ event.spaces }}</p>
                         <p class="result-info">Description: {{ event.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_e' event.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -168,6 +172,10 @@
                     <div class="result-content">
                         <h3 class="result-title">{{ course.name }}</h3>
                         <p class="result-info">{{ course.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_course' course.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -185,6 +193,10 @@
                     <div class="result-content">
                         <h3 class="result-title">{{ community.name }}</h3>
                         <p class="result-info">{{ community.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_com' community.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>

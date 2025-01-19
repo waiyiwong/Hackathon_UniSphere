@@ -98,9 +98,9 @@
         <select class="filter-select" name="interest">
             <option value="">All Interests</option>
             {% for interest in interests %}
-                <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
-                    {{ interest.name }}
-                </option>
+            <option value="{{ interest.pk }}" {% if interest == selected_interest %}selected{% endif %}>
+                {{ interest.name }}
+            </option>
             {% endfor %}
         </select>
         <button class="nav-button-blue" type="submit">Filter</button>
@@ -118,6 +118,10 @@
                         <p class="result-info">Location: {{ event.location }}</p>
                         <p class="result-info">Spaces: {{ event.spaces }}</p>
                         <p class="result-info">Description: {{ event.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_e' event.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>

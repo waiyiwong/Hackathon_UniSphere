@@ -310,3 +310,27 @@ def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     context = {'event': event}
     return render(request, 'events/event_detail.html', context)
+
+def request_to_join_e(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if request.user.is_authenticated:
+        messages.success(request, 'Request received. A confirmation will be sent once enrolled.')
+    else:
+        messages.error(request, 'Please log in to request to join an event.')
+    return redirect('eventsandcourses')
+
+def request_to_join_course(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+    if request.user.is_authenticated:
+        messages.success(request, 'Request received. A confirmation will be sent once enrolled.')
+    else:
+        messages.error(request, 'Please log in to request to join a course.')
+    return redirect('eventsandcourses')
+
+def request_to_join_com(request, community_id):
+    community = get_object_or_404(Community, pk=community_id)
+    if request.user.is_authenticated:
+        messages.success(request, 'Request received. A confirmation will be sent by the organiser.')
+    else:
+        messages.error(request, 'Please log in to request to join a community.')
+    return redirect('eventsandcourses')
