@@ -1,13 +1,13 @@
 # UniSphere
 
-<img src="static/images/unisphere_logo.jpg" alt="UniSphere Logo" style="border-radius: 18%; width: 150px; height: auto;">
+<img src="static/assets/images/logo.png" alt="UniSphere Logo" style="border-radius: 18%; width: 150px; height: auto;">
 
 Welcome to **UniSphere**! This Django-based web application is designed to connect university students with events, courses, communities, and opportunities based on their interests. Users can join and interact with campus activities, while admins can approve memberships, issue tickets, and manage events and courses.
 
-[View the live project here](https://your-uni-sphere-link.com/)
+[View the live project here](https://hackathon-unisphere-4f66f95d78e7.herokuapp.com/)
 (To open in a new tab/window, press "ctrl" (or ⌘ for Mac) + click on the link)
 
-![Responsive Mockup](static/images/responsive_mockup.png)
+![Responsive Mockup](static/assets/images/responsive.png)
 
 ## Table of Contents
 
@@ -167,6 +167,7 @@ The site is designed to be responsive across all device sizes using Bootstrap 5.
 
 #### 5.2 Color Scheme:
 The site uses a professional and modern color scheme to match the academic nature of the platform.
+![Color Scheme](static/assets/images/color_scheme.png)
 
 #### 5.3 Typography:
 We use **Arial** and **Sans-serif** fonts for a clean, readable interface.
@@ -194,7 +195,6 @@ Images include event-related photos, icons, and profile pictures.
 ## Testing
 
 - **Manual testing** for responsiveness, accessibility, and cross-browser functionality.
-- **Automated testing** using Django’s built-in testing tools to validate models, views, and forms.
 
 ## Deployment
 
@@ -209,9 +209,6 @@ Images include event-related photos, icons, and profile pictures.
 ### Code
 - Developed using Django and Bootstrap for web development.
 
-### Content
-- User stories and UX design inspired by best practices in web development and user experience.
-
 ### Media
 - Images sourced from icons from [FontAwesome](https://fontawesome.com/).
-- Logo and favicon was created by Waiyi using Adobe.
+- Logo and favicon were created by Waiyi using Adobe.
