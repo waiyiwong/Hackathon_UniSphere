@@ -19,4 +19,7 @@ urlpatterns = [
     path('delete_community/<int:community_id>/', views.delete_community, name='delete_community'),
     path('edit_ticket/<int:ticket_id>/', views.edit_ticket, name='edit_ticket'),
     path('delete_ticket/<int:ticket_id>/', views.delete_ticket, name='delete_ticket'),
+    path('course/request_to_join/<int:course_id>/', views.request_to_join_course, name='request_to_join_course'),
+    path('event/request_to_join/<int:event_id>/', views.request_to_join_e, name='request_to_join_e'),
+    path('community/request_to_join/<int:community_id>/', views.request_to_join_com, name='request_to_join_com'),
 ]

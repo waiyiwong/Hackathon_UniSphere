@@ -115,6 +115,10 @@
                     <div class="result-content">
                         <h3 class="result-title">{{ community.name }}</h3>
                         <p class="result-info">{{ community.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_com' community.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>

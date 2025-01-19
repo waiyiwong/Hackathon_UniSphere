@@ -115,6 +115,10 @@
                     <div class="result-content">
                         <h3 class="result-title">{{ course.name }}</h3>
                         <p class="result-info">{{ course.description | safe }}</p>
+                        <form method="POST" action="{% url 'request_to_join_course' course.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button-blue">Request to Join</button>
+                        </form>
                     </div>
                 </div>
             </div>
