@@ -88,7 +88,12 @@ def event_list(request):
     for event in events:
         average_rating = event.ratings.aggregate(Avg('rating'))['rating__avg'] or 0.0
         event.average_rating = average_rating
-        event.user_has_approved_ticket = Ticket.objects.filter(ticket_holder=request.user, event=event, approved=True).exists()
+
+        if request.user.is_authenticated:
+            event.user_has_approved_ticket = Ticket.objects.filter(
+                ticket_holder=request.user, event=event, approved=True).exists()
+        else:
+            event.user_has_approved_ticket = False
 
     if request.method == 'GET' and 'interest' in request.GET:
         selected_interest = get_object_or_404(Interests, pk=request.GET['interest'])
