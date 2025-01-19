@@ -1,6 +1,7 @@
 # UniSphere
-
-<img src="static/assets/images/logo.png" alt="UniSphere Logo" style="border-radius: 18%; width: 150px; height: auto;">
+<p align="center">
+    <img src="static/assets/images/logo.png" alt="UniSphere Logo" style="width: 200px; height: auto;">
+</p>
 
 Welcome to **UniSphere**! This Django-based web application is designed to connect university students with events, courses, communities, and opportunities based on their interests. Users can join and interact with campus activities, while admins can approve memberships, issue tickets, and manage events and courses.
 
@@ -163,7 +164,26 @@ The site is designed to be responsive across all device sizes using Bootstrap 5.
 ### 5. Surface Plane
 
 #### 5.1 Wireframes:
-![Wireframes](static/images/wireframes.png)
+
+Home page
+
+![Wireframes](static/assets/images/wireframe_home.png)
+
+Home page 2
+
+![Wireframes](static/assets/images/wireframe_home2.png)
+
+Sign in page
+
+![Wireframes](static/assets/images/wireframe_signin.png)
+
+Events page
+
+![Wireframes](static/assets/images/wireframe_event.png)
+
+About page
+
+![Wireframes](static/assets/images/wireframe_about.png)
 
 #### 5.2 Color Scheme:
 The site uses a professional and modern color scheme to match the academic nature of the platform.

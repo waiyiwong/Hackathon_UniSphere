@@ -6,6 +6,7 @@ from .forms import CourseForm, EventForm, CommunityForm, TicketForm, CourseEditF
 from categories.models import Interests
 from django.db.models import Q
 from django.contrib import messages
+from django.db.models import Avg
 
 # Create your views here.
 def events_courses(request):
@@ -28,6 +29,10 @@ def events_and_courses(request):
             communities = communities.filter(interests=selected_interest)
         else:
             selected_interest = None
+            
+    for event in events:
+        average_rating = event.ratings.aggregate(Avg('rating'))['rating__avg'] or 0.0
+        event.average_rating = average_rating
 
     context = {
         'courses': courses,
@@ -79,6 +84,11 @@ def event_list(request):
     interests = Interests.objects.all()
     selected_interest = None
     events = Event.objects.all()
+    
+    for event in events:
+        average_rating = event.ratings.aggregate(Avg('rating'))['rating__avg'] or 0.0
+        event.average_rating = average_rating
+        event.user_has_approved_ticket = Ticket.objects.filter(ticket_holder=request.user, event=event, approved=True).exists()
 
     if request.method == 'GET' and 'interest' in request.GET:
         selected_interest = get_object_or_404(Interests, pk=request.GET['interest'])
