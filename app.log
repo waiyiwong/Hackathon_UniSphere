@@ -52,3 +52,8 @@ TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contr
 2025-01-19 15:33:14,509 - INFO - /workspace/Hackathon_UniSphere/events/views.py changed, reloading.
 2025-01-19 15:33:14,961 - INFO - Watching for file changes with StatReloader
 2025-01-19 15:50:27,868 - INFO - Watching for file changes with StatReloader
+2025-01-19 15:55:42,067 - INFO - Watching for file changes with StatReloader
+2025-01-19 16:08:41,084 - INFO - Watching for file changes with StatReloader
+2025-01-19 16:09:53,998 - INFO - /workspace/Hackathon_UniSphere/unisphere/settings.py changed, reloading.
+2025-01-19 16:09:54,406 - INFO - Watching for file changes with StatReloader
+2025-01-19 16:15:00,643 - INFO - Watching for file changes with StatReloader

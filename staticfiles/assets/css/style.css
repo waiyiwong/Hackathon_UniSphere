@@ -3,6 +3,10 @@
     width: 3em;
 }
 
+.home-msg {
+    color: #545b62;
+}
+
 .home-hero-image{
     display: block;
     max-width: 100%;
@@ -12,6 +16,14 @@
 
 .blue-h1 {
     color:#0D8AA6;
+}
+
+.gradient-h1 {
+    color: #545ABF;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
 }
 
 /* Home-Buttons */
@@ -35,17 +47,19 @@
 }
 
 .nav-button-blue {
-    background-color: #0D8AA6;
-    border: none;
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+    color: white;
     padding: 5px 12px;
     border-radius: 6px;
     text-decoration: none;
-    color: white;
-    transition: background-color 0.5s;
+    transition: background-color 0.2s;
+    border: none;
+    outline: none;
 }
 
 .nav-button-blue:hover {
-    background-color: #36D9C8;
+    background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+    transform: translateY(-2px);
 }
 
 .home-button-blue {
@@ -116,14 +130,17 @@
 /* About.html */
 .dev-card {
     color: #545b62;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    padding: 24px;
+    background: #e5edfc;
+    border-radius: 0 120px 0 120px;
+    padding: 12px;
     box-shadow: 3px rgba(0, 0, 0, 1);
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    border: 3px;
+    border-style: dotted;
+    border-color: #545ABF;
 }
 
 .dev-avatar {
@@ -151,8 +168,27 @@
     color: #545b62;
 }
 
+/* Navbar button */
+.nav-btn {
+    background: linear-gradient(135deg, #0D8AA6, #6C4ED9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border: none;
+    outline: none;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, #6C4ED9, #0D8AA6);
+    transform: translateY(-2px);
+}
+
 body {
     background-color: #F9FAFC;
+    color: #333;
+    font-family: Arial, sans-serif;
 }
 
 .brand {
@@ -317,3 +353,32 @@ body {
 .approval {
     color: rgb(222, 146, 168);
 }
+
+@media (max-width: 800px) {
+    .dev-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dev-avatar {
+        width: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .dev-info {
+        text-align: center;
+    }
+
+    .dev-card .dev-avatar {
+        order: 1;
+    }
+
+    .dev-card .dev-info {
+        order: 2;
+    }
+
+    .dev-card.wai .dev-avatar,
+        .dev-card.joe .dev-avatar {
+            order: 0; 
+    }
