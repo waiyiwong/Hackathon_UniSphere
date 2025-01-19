@@ -132,7 +132,7 @@
     color: #545b62;
     background: #e5edfc;
     border-radius: 0 120px 0 120px;
-    padding: 24px;
+    padding: 12px;
     box-shadow: 3px rgba(0, 0, 0, 1);
     margin-bottom: 2rem;
     display: flex;
@@ -141,8 +141,6 @@
     border: 3px;
     border-style: dotted;
     border-color: #545ABF;
-    -moz-border-radius: 0 120px 0 120px;
-    -webkit-border-radius: 0 120px 0 120px;
 }
 
 .dev-avatar {
@@ -355,3 +353,32 @@ body {
 .approval {
     color: rgb(222, 146, 168);
 }
+
+@media (max-width: 800px) {
+    .dev-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dev-avatar {
+        width: 80px;
+        margin-bottom: 1rem;
+    }
+
+    .dev-info {
+        text-align: center;
+    }
+
+    .dev-card .dev-avatar {
+        order: 1;
+    }
+
+    .dev-card .dev-info {
+        order: 2;
+    }
+
+    .dev-card.wai .dev-avatar,
+        .dev-card.joe .dev-avatar {
+            order: 0; 
+    }
