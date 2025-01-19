@@ -1,7 +1,7 @@
 # UniSphere
-<center>
+<div style="text-align: center;">
 <img src="static/assets/images/logo.png" alt="UniSphere Logo" style="border-radius: 18%; width: 150px; height: auto;">
-</center>
+</div>
 
 Welcome to **UniSphere**! This Django-based web application is designed to connect university students with events, courses, communities, and opportunities based on their interests. Users can join and interact with campus activities, while admins can approve memberships, issue tickets, and manage events and courses.
 
